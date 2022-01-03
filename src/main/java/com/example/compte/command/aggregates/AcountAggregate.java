@@ -1,9 +1,12 @@
 package com.example.compte.command.aggregates;
 
 import com.example.compte.commandApi.commandes.CreateAccountCommand;
+import com.example.compte.commandApi.commandes.CreditAccountCommand;
 import com.example.compte.commandApi.enums.AccountStatus;
 import com.example.compte.commandApi.events.AccountActivatedEvent;
 import com.example.compte.commandApi.events.AccountCreatedEvent;
+import com.example.compte.commandApi.events.AccountCreditedEvent;
+import com.example.compte.commandApi.exception.AmountNegativeException;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
@@ -51,6 +54,22 @@ public class AcountAggregate {
             public void on (AccountActivatedEvent event){
                 this.accountStatus = event.getStatus();
 
+            }
+               @CommandHandler
+            // fonctionn de desicion
+            public  void  handele (CreditAccountCommand creditAccountCommand){
+               if(creditAccountCommand.getAmmount()<0) throw new AmountNegativeException("Amount should not be negative ");
+              AggregateLifecycle.apply( new AccountCreditedEvent(
+                      creditAccountCommand.getId(),
+                      creditAccountCommand.getAmmount(),
+                      creditAccountCommand.getCurrency()
+              ) );
+            }
+
+            // changer etat du compte => fonction de evolution
+            @EventSourcingHandler
+           public void on (AccountCreditedEvent event){
+                 this.initialBalance+= event.getAmount();
             }
 
 

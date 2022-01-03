@@ -1,7 +1,7 @@
-# HPC_distributed-system_micro-services_with_JWT_security
+# Ibanking App Compte_CQRS-Event-Sourcing_Axon
 
 ## Application
-- Créer une application qui permet de gérer des comptes bancaires permet de :
+-  une Application qui permet de gérer des comptes bancaires permet de :
     - Ajouter un Compte
     - Activer un compte après création
     - Créditer un compte 
@@ -12,9 +12,14 @@
     - Suivre en temps réel l’état d’un compte
     
 # Architecture du projet
+-  Event Driven Micro-services Architectures, CQRS & Event Sourcing Patterns : Spring Cloud & AXON Framework
+
  <img src="images/Architecture.PNG" alt="">
 
 ## Technologie est Tools
+- Event Driven Micro-services Architectures
+- CQRS & Event Sourcing Patterns 
+- Spring Cloud & AXON Framework
 - IntelliJ IDEA
 - Java 8
 - Maven
@@ -22,7 +27,6 @@
 - Spring Boot DevTools
 - Mysql database
 - lombok
-- Axon framework (CQRS && Event Sourcing)
 
 ## Commands Side
 - Creer un compte
