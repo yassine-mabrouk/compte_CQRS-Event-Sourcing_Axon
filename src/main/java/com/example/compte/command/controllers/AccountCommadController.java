@@ -34,7 +34,6 @@ public class AccountCommadController {
       ));
       return commandResponse;
     }
-    @Transactional
     @PutMapping(path="/credit")
     public    CompletableFuture<String> creditAccount(@RequestBody CreditAccountRequestDto request){
         CompletableFuture<String> commandResponse = commandGateway.send(new CreditAccountCommand(
@@ -44,6 +43,16 @@ public class AccountCommadController {
         ));
         return commandResponse;
     }
+    @PutMapping(path="/debit")
+    public    CompletableFuture<String> debitAccount(@RequestBody DebitAccountRequestDto request){
+        CompletableFuture<String> commandResponse = commandGateway.send(new DebitAccountCommand(
+                request.getAccountId(),
+                request.getAmount(),
+                request.getCurrency()
+        ));
+        return commandResponse;
+    }
+
 
    @GetMapping(path="/eventStore/{id}")
    public Stream eventStore (@PathVariable String id ){

@@ -2,10 +2,12 @@ package com.example.compte.command.aggregates;
 
 import com.example.compte.commandApi.commandes.CreateAccountCommand;
 import com.example.compte.commandApi.commandes.CreditAccountCommand;
+import com.example.compte.commandApi.commandes.DebitAccountCommand;
 import com.example.compte.commandApi.enums.AccountStatus;
 import com.example.compte.commandApi.events.AccountActivatedEvent;
 import com.example.compte.commandApi.events.AccountCreatedEvent;
 import com.example.compte.commandApi.events.AccountCreditedEvent;
+import com.example.compte.commandApi.events.AccountDebitedEvent;
 import com.example.compte.commandApi.exception.AmountNegativeException;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
@@ -55,6 +57,7 @@ public class AcountAggregate {
                 this.accountStatus = event.getStatus();
 
             }
+            //============== Credit operation ==================
                @CommandHandler
             // fonctionn de desicion
             public  void  handele (CreditAccountCommand creditAccountCommand){
@@ -71,6 +74,24 @@ public class AcountAggregate {
            public void on (AccountCreditedEvent event){
                  this.initialBalance+= event.getAmount();
             }
+
+
+    //============== Credit operation ==================
+            @CommandHandler
+            public void handele (DebitAccountCommand debitAccountCommand){
+             if (debitAccountCommand.getAmount()<0) throw new AmountNegativeException("Amount should not be negative ");
+             AggregateLifecycle.apply(new AccountDebitedEvent (
+                debitAccountCommand.getId(),
+                debitAccountCommand.getAmount(),
+                     debitAccountCommand.getCurrency()
+             ));
+            }
+            // changer etat
+           @EventSourcingHandler
+            public void on (AccountDebitedEvent evet){
+            this.initialBalance-=evet.getAmount();
+           }
+
 
 
 }

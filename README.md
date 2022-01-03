@@ -38,6 +38,9 @@
 - Consulter Event Store pour un compte
   <img src="images/eventStoreForAcount.PNG" alt="">
   
+- Creer un compte
+  <img src="images/ crediAccount.PNG" alt="">
+  
 ## 6) Use
 Ce projet est un projet Spring boot 
 - git clone repo
