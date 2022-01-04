@@ -35,8 +35,9 @@ public class AcountAggregate {
         AggregateLifecycle.apply(new AccountCreatedEvent(
                 createAccountCommand.getId(),
                 createAccountCommand.getInitialBalance(),
-                createAccountCommand.getCurrency()
-        ));
+                createAccountCommand.getCurrency(),
+                AccountStatus.CREATED
+                ));
     }
             // fonction d'evolution pour muter etat du compte
             @EventSourcingHandler

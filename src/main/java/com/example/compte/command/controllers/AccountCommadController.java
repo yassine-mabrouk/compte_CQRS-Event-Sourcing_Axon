@@ -59,7 +59,7 @@ public class AccountCommadController {
     return  eventStore.readEvents(id).asStream();
    }
 
-    //  @ExceptionHandler(Exception.class)
+     @ExceptionHandler(Exception.class)
      public ResponseEntity<String> getErrorResponse(Exception e){
        ResponseEntity<String> entity= new ResponseEntity(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
        return entity;

@@ -28,7 +28,7 @@
 - Mysql database
 - lombok
 
-## Commands Side
+## Commands Side (Write)
 - Creer un compte
   <img src="images/createAccount.PNG" alt="">
   
@@ -40,11 +40,15 @@
   
 - Creer un compte
   <img src="images/ crediAccount.PNG" alt="">
+
+## Guery Side (Read )
+- Recupérer tout les comptes 
+  <img src="images/allAccount.PNG" alt="">
   
 ## 6) Use
 Ce projet est un projet Spring boot 
 - git clone repo
-- configuration Databsae pour chaque microservice (application.properties)
+- configuration Databsae  (application.properties)
 - Run app
 ## 7) Sources
 pour plus de détails consulter les sources suivantes
